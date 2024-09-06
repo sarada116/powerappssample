@@ -1,0 +1,223 @@
+Screen1 As screen:
+    Fill: =RGBA(174, 208, 221, 0.5)
+
+    Label1 As label:
+        Text: ="NAME"
+        X: =40
+        Y: =40
+        ZIndex: =1
+
+    txtName As text:
+        Default: =
+        Width: =365
+        X: =271
+        Y: =40
+        ZIndex: =2
+
+    Label2 As label:
+        Text: ="DEPARTMENTS"
+        X: =40
+        Y: =230
+        ZIndex: =3
+
+    Label3 As label:
+        Text: ="CITY"
+        X: =40
+        Y: =135
+        ZIndex: =4
+
+    txtCity As text:
+        Default: =
+        Width: =365
+        X: =271
+        Y: =136
+        ZIndex: =5
+
+    departmentfield As dropdown:
+        Default: =
+        Items: =Choices('EMPLOYEE FORM'.DEPARTMENTS)
+        Width: =365
+        X: =271
+        Y: =230
+        ZIndex: =6
+
+    Label4 As label:
+        Text: ="AGES"
+        X: =40
+        Y: =341
+        ZIndex: =7
+
+    txtages As text:
+        Default: =
+        Format: =TextFormat.Number
+        Width: =365
+        X: =271
+        Y: =335
+        ZIndex: =8
+
+    Label5 As label:
+        Text: ="GENDER"
+        X: =40
+        Y: =441
+        ZIndex: =9
+
+    Label6 As label:
+        Text: ="MANAGER"
+        X: =40
+        Y: =559
+        ZIndex: =11
+
+    cbmanager As combobox:
+        DisplayFields: =["DisplayName"]
+        Items: =Choices('EMPLOYEE FORM'.MANAGER)
+        SearchFields: =["DisplayName"]
+        SearchItems: =Choices('EMPLOYEE FORM'.MANAGER,cbmanager.SearchText)
+        SelectMultiple: =false
+        Width: =365
+        X: =271
+        Y: =559
+        ZIndex: =12
+
+    Label7 As label:
+        Text: ="Name"
+        X: =738
+        Y: =40
+        ZIndex: =13
+
+    TXTNAME As text:
+        Default: =
+        Width: =365
+        X: =941
+        Y: =40
+        ZIndex: =14
+
+    btnsubmit As button:
+        Height: =45
+        OnSelect: |-
+            =Patch('EMPLOYEE FORM',Defaults('EMPLOYEE FORM'),{
+                
+            NAME:txtName.Text,CITY:txtCity.Text,DEPARTMENTS:departmentfield.Selected,AGES:Value(txtages.Text),GENDER:gender.Selected,MANAGER:cbmanager.Selected
+            
+            });
+            Patch('validation list',Defaults('validation list'),{
+                'Full name':TXTNAME.Text,Age:Value(TXTAGE.Text),'Joining date':DatePicker1.SelectedDate,'Contact number':Value(TXTCONTACT.Text),'Email address':TXTEMAIL.Text,Salary:Value(TXTSALARY.Text)
+                
+            
+            
+            });
+            Notify("SUCCESSFULLY SUBMITTED",NotificationType.Success);
+            Reset(txtName);Reset(txtCity);Reset(departmentfield);Reset(txtages);Reset(gender);Reset(cbmanager);Reset(TXTNAME);Reset(TXTAGE);Reset(DatePicker1);Reset(TXTCONTACT);Reset(TXTEMAIL);Reset(TXTSALARY);
+        Text: ="Submit"
+        Width: =241
+        X: =588
+        Y: =692
+        ZIndex: =15
+
+    gender As radio:
+        Height: =48
+        Items: =Choices([@'EMPLOYEE FORM'].GENDER)
+        Layout: =Layout.Horizontal
+        Width: =365
+        X: =271
+        Y: =432
+        ZIndex: =16
+
+    Label8 As label:
+        Text: ="Age"
+        X: =738
+        Y: =135
+        ZIndex: =17
+
+    TXTAGE As text:
+        Default: =
+        Format: =TextFormat.Number
+        Width: =365
+        X: =941
+        Y: =135
+        ZIndex: =18
+
+    Label9 As label:
+        Text: ="Joining date"
+        X: =738
+        Y: =211
+        ZIndex: =19
+
+    DatePicker1 As datepicker:
+        Width: =365
+        X: =941
+        Y: =233
+        ZIndex: =20
+
+    Label10 As label:
+        Text: ="Contact number"
+        X: =738
+        Y: =341
+        ZIndex: =21
+
+    TXTCONTACT As text:
+        Default: =
+        Format: =TextFormat.Number
+        Width: =365
+        X: =941
+        Y: =342
+        ZIndex: =22
+
+    Label11 As label:
+        Text: ="Email address"
+        X: =738
+        Y: =441
+        ZIndex: =23
+
+    TXTEMAIL As text:
+        Default: =
+        Width: =365
+        X: =941
+        Y: =441
+        ZIndex: =24
+
+    Label12 As label:
+        Text: ="Salary"
+        X: =738
+        Y: =559
+        ZIndex: =25
+
+    TXTSALARY As text:
+        Default: ="Text input"
+        Format: =TextFormat.Number
+        Width: =365
+        X: =941
+        Y: =559
+        ZIndex: =26
+
+    Container1 As groupContainer.manualLayoutContainer:
+        DropShadow: =DropShadow.Bold
+        Height: =29
+        Width: =1366
+        ZIndex: =27
+
+        Header1 As Header:
+            DisplayMode: =DisplayMode.Edit
+            Height: =Parent.Height
+            IsLogoVisible: =false
+            IsProfilePictureVisible: =false
+            IsTitleVisible: =false
+            OnSelectLogo: =false
+            Title: ="PATCH FUNCTION"
+            UserEmail: =User().Email
+            UserImage: =User().Image
+            UserName: =User().FullName
+            Width: =Parent.Width
+            X: =0
+            Y: =0
+            ZIndex: =1
+
+        Label13 As label:
+            Align: =Align.Center
+            Color: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Lato Black'
+            Height: =29
+            Size: =20
+            Text: ="PATCH FUNCTION"
+            Width: =1366
+            ZIndex: =2
+
